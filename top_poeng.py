@@ -2,8 +2,22 @@ import sqlite3
 conn = sqlite3.connect('fantasy.db')
 c = conn.cursor()
 c2 = conn.cursor()
-rows = c.execute('select * from elements order by total_points desc limit 10')
-for row in rows:
-    t = [row[1]]
-    c2.execute('SELECT * FROM teams WHERE id=?', t)
-    print('{:<15}{:<30} {:>3}'.format(c2.fetchone()[1], row[2][:30], row[3]))
+
+sql = """
+select t.name, e.name, e.total_points 
+from elements e 
+    join teams t on t.id = e.team_id
+where
+    element_type = ?
+order by total_points desc 
+limit 10
+"""
+
+posisjoner = {1 : 'Keeper', 2: 'Forsvar', 3: 'Midtbane', 4: 'Spiss'}
+
+for p in posisjoner:
+    rows = c.execute(sql, [p])
+    print(posisjoner[p], '********************************************')
+    for row in rows:
+        print('{:<15}{:<30} {:>3}'.format(row[0], row[1][:30], row[2]))
+    print()

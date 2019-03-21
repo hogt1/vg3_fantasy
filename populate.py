@@ -14,8 +14,8 @@ data = r.json()
 #    form real
 
 for e in data['elements']:
-    r = (e['id'], e['team'], e['first_name'] + ' ' + e['second_name'], e['total_points'], e['form'] )
-    c.execute("insert into elements values (?, ?, ?, ?, ?)", r)
+    r = (e['id'], e['team'], e['first_name'] + ' ' + e['second_name'], e['total_points'], e['form'], e['element_type'] )
+    c.execute("insert into elements values (?, ?, ?, ?, ?, ?)", r)
 
 
 for t in data['teams']:

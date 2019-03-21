@@ -9,7 +9,8 @@ CREATE TABLE elements (
     team_id integer, 
     name text, 
     total_points integer, 
-    form real
+    form real,
+    element_type integer
     )
 """)
 
