@@ -6,7 +6,7 @@ c = conn.cursor()
 c.execute("""
 CREATE TABLE elements (
     id integer primary key,
-    team_code integer, 
+    team_id integer, 
     name text, 
     total_points integer, 
     form real
